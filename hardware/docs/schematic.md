@@ -91,10 +91,9 @@ ADS1115 AIN0 sees 1.236V (pH 0) to 2.064V (pH 14). Use ±2.048V PGA setting.
 
 ## EC Analog Frontend (LMP91200)
 
-> **⚠ SOURCING ALERT**: LMP91200 (both SD and MT variants) is obsolete and unavailable
-> at Mouser and DigiKey as of May 2026. The PCB footprint is retained but the EC section
-> may need redesign before ordering. Options: INA333AIDR (firmware fallback documented in
-> firmware/CLAUDE.md), or discrete RC-bridge approach using ADS1115 AIN1 directly.
+> **DNP v1** — LMP91200 is EOL/unavailable (May 2026). U3 + R15 + R16 + C3 + C4 + C5
+> are all DNP. J8 pins 1–2 (WE/RE) are unconnected. J8 pins 3–4 (NTC) remain active.
+> Footprint retained; plan is AD5933 impedance converter for v2.
 
 ```
 GP13 (PWM A) ── R5(10kΩ) ── C3(100nF) to GND ── LMP91200 excitation IN+
