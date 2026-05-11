@@ -57,6 +57,12 @@ def sym(lib_id, ref, value, footprint, x, y, angle=0, dnp=False, datasheet="~"):
         f'\t\t(property "Datasheet" "{datasheet}" (at {x:.2f} {y:.2f} {angle})\n'
         f'\t\t\t(effects (font (size 1.27 1.27)) hide)\n'
         f'\t\t)\n'
+        f'\t\t(property "Description" "" (at {x:.2f} {y:.2f} {angle})\n'
+        f'\t\t\t(effects (font (size 1.27 1.27)) hide)\n'
+        f'\t\t)\n'
+        f'\t\t(property "ki_keywords" "" (at {x:.2f} {y:.2f} {angle})\n'
+        f'\t\t\t(effects (font (size 1.27 1.27)) hide)\n'
+        f'\t\t)\n'
         f'\t)'
     )
 
