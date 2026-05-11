@@ -91,6 +91,11 @@ ADS1115 AIN0 sees 1.236V (pH 0) to 2.064V (pH 14). Use ±2.048V PGA setting.
 
 ## EC Analog Frontend (LMP91200)
 
+> **⚠ SOURCING ALERT**: LMP91200 (both SD and MT variants) is obsolete and unavailable
+> at Mouser and DigiKey as of May 2026. The PCB footprint is retained but the EC section
+> may need redesign before ordering. Options: INA333AIDR (firmware fallback documented in
+> firmware/CLAUDE.md), or discrete RC-bridge approach using ADS1115 AIN1 directly.
+
 ```
 GP13 (PWM A) ── R5(10kΩ) ── C3(100nF) to GND ── LMP91200 excitation IN+
 GP14 (PWM B) ── R6(10kΩ) ── C4(100nF) to GND ── LMP91200 excitation IN–
@@ -160,7 +165,10 @@ K1 NC  ─── J7 Wago port 6 pin 3
 | J6 (Wago 5) | 3V3_DIG | GND_DIG | GP17 | Generic |
 | J7 (Wago 6) | K1 COM | K1 NO | K1 NC | Relay SPDT contacts |
 
-**PIR power gate**: a P-channel MOSFET (or NPN switching) controlled by GP12 switches the 3V3 supply to the PIR on Wago port 3. This avoids the 50–65 mA PIR standby current during sleep.
+**PIR power gate**: Q2 (BSS84, SOT-23 P-channel MOSFET) controlled by GP12 switches the 3V3 supply to the PIR on Wago port 3. This avoids the 50–65 mA PIR standby current during sleep.
+- Source → 3V3_DIG, Drain → PIR VCC (Wago port 3 pin 1), Gate → GP12
+- R17 (10 kΩ) pulls gate to 3V3_DIG so FET is OFF (PIR off) when GP12 is floating at boot
+- GP12 LOW = Vgs −3.3 V = FET ON; GP12 HIGH = Vgs 0 V = FET OFF
 
 ---
 
