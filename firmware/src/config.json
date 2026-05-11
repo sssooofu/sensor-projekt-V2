@@ -1,0 +1,57 @@
+{
+  "device_id": "pico_001",
+  "fw_version": "1.0.0",
+
+  "wifi": {
+    "ssid": "YOUR_SSID",
+    "password": "YOUR_PASSWORD",
+    "timeout_s": 20
+  },
+
+  "server": {
+    "url": "http://192.168.1.100:8080",
+    "timeout_s": 10,
+    "retry_count": 3,
+    "retry_delay_s": 5
+  },
+
+  "poll_interval_s": 1800,
+
+  "sensors": {
+    "ph":          { "enabled": true,  "ads_channel": 0 },
+    "ec":          { "enabled": true },
+    "temperature": { "enabled": true },
+    "humidity":    { "enabled": true },
+    "light":       { "enabled": true },
+    "soil":        { "enabled": true,  "ads_channel": 2 },
+    "motion":      { "enabled": true,  "scan_duration_s": 5 }
+  },
+
+  "calibration": {
+    "ph": {
+      "v_at_ph4": 1.855,
+      "v_at_ph7": 1.650
+    },
+    "ec": {
+      "cell_constant": 1.0,
+      "ref_voltage": 1.65,
+      "ref_temp_c": 25.0
+    },
+    "soil": {
+      "dry_count": 26000,
+      "wet_count": 13000
+    }
+  },
+
+  "relay": {
+    "max_on_duration_s": 600
+  },
+
+  "relay_rules": [
+    { "sensor": "soil_pct", "op": "<", "value": 30, "action": "relay_on", "duration_s": 300 }
+  ],
+
+  "storage": {
+    "buffer_slots": 48
+  }
+}

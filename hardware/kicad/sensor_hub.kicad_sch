@@ -1,0 +1,22 @@
+(kicad_sch
+	(version 20231120)
+	(generator "eeschema")
+	(generator_version "8.0")
+	(uuid "a1b2c3d4-e5f6-7890-abcd-ef1234567890")
+	(paper "A3")
+	(title_block
+		(title "Pico W Sensor Hub")
+		(rev "V2.0")
+		(company "sensor_projekt_V2")
+		(comment 1 "Draw schematic using hardware/docs/schematic.md as reference")
+		(comment 2 "Key ICs: Pico W, ADS1115, LMP91200, AD8603, AP2112K")
+		(comment 3 "BOM: hardware/docs/bom.csv")
+	)
+	(lib_symbols)
+	(sheet_instances
+		(path "/"
+			(page "1")
+		)
+	)
+	(embedded_fonts no)
+)

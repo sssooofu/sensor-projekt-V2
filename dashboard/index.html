@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sensor Hub</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4/dist/chart.umd.min.js"></script>
+  <link rel="stylesheet" href="styles/main.css" />
+</head>
+<body>
+  <header>
+    <h1>Sensor Hub</h1>
+    <div id="device-bar">
+      <label for="device-select">Device:</label>
+      <select id="device-select"><option value="">Loading…</option></select>
+      <span id="last-seen"></span>
+    </div>
+  </header>
+
+  <main>
+    <section id="chart-section">
+      <div id="sensor-toggles">
+        <label><input type="checkbox" data-sensor="temp_c"       checked /> Temperature</label>
+        <label><input type="checkbox" data-sensor="humidity_pct" checked /> Humidity</label>
+        <label><input type="checkbox" data-sensor="ph"           checked /> pH</label>
+        <label><input type="checkbox" data-sensor="ec_us"        checked /> EC</label>
+        <label><input type="checkbox" data-sensor="lux"                 /> Light</label>
+        <label><input type="checkbox" data-sensor="soil_pct"    checked /> Soil</label>
+      </div>
+      <div id="time-range">
+        <button data-hours="6">6 h</button>
+        <button data-hours="24" class="active">24 h</button>
+        <button data-hours="168">7 d</button>
+      </div>
+      <canvas id="sensor-chart"></canvas>
+    </section>
+
+    <section id="relay-section">
+      <h2>Relay</h2>
+      <div id="relay-controls">
+        <button id="btn-relay-on">ON (5 min)</button>
+        <button id="btn-relay-off">OFF</button>
+        <input type="number" id="relay-duration" value="300" min="1" max="600" />
+        <label for="relay-duration">seconds</label>
+      </div>
+      <h3>Auto-rules <small>(from config.json)</small></h3>
+      <div id="rules-display"></div>
+    </section>
+  </main>
+
+  <script type="module" src="src/api.js"></script>
+  <script type="module" src="src/charts.js"></script>
+  <script type="module" src="src/relay.js"></script>
+  <script type="module" src="src/app.js"></script>
+</body>
+</html>

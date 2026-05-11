@@ -1,0 +1,12 @@
+# KiCad lock files
+*.lck
+
+# SQLite database (created at runtime)
+*.db
+
+# Python
+__pycache__/
+*.pyc
+
+# mpremote / MicroPython artifacts
+readings.json
