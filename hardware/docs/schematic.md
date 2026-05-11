@@ -13,12 +13,12 @@ USB-C 5V (power bank)
 │                                         Relay coil (+)
 │
 └─ Pico W 3V3(OUT)
-     ├─ Digital 3V3 ─── BH1750, DS18B20, DHT22, PIR, LMP91200, BC817 pullups
+     ├─ Digital 3V3 ─── VEML7700, DS18B20, DHT22, PIR, LMP91200, BC817 pullups
      └─ AP2112K IN ──── AP2112K OUT (Analog 3V3) ─── ADS1115, AD8603, VREF divider, NTC pullup
 
 I2C Bus (GP2/GP3, 4.7kΩ pullups to 3V3_DIG)
   ├── ADS1115  addr 0x48 (ADDR pin → GND)
-  └── BH1750   addr 0x23 (ADDR pin → GND via 10kΩ)
+  └── VEML7700 addr 0x10 (fixed; no ADDR pin)
 
 SPI Bus (GP4/GP5/GP6/GP7)
   └── LMP91200 (EC analog frontend)
@@ -33,7 +33,7 @@ GPIO direct:
   GP12 ── PIR MOSFET gate (power gate for PIR)
   GP13 ── EC excitation PWM A → RC filter → LMP91200
   GP14 ── EC excitation PWM B (complement) → RC filter → LMP91200
-  GP15 ── BH1750 ADDR (tied low = 0x23)
+  GP15 ── (spare — was BH1750 ADDR; not needed for VEML7700)
   GP16 ── Wago port 4 signal (generic)
   GP17 ── Wago port 5 signal (generic)
 ```

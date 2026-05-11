@@ -41,7 +41,7 @@ Download: https://micropython.org/download/RPI_PICO_W/
 | GP12 | PIR_MOSFET | PIR power gate (saves 50–65 mA when off) |
 | GP13 | EC_PWM_A | EC excitation, 1–5 kHz |
 | GP14 | EC_PWM_B | EC excitation complement |
-| GP15 | BH1750_ADDR | Low = I2C addr 0x23 |
+| GP15 | (spare) | Was BH1750 ADDR; VEML7700 has no ADDR pin |
 | GP16 | WAGO4 | Generic (Wago port 4) |
 | GP17 | WAGO5 | Generic (Wago port 5) |
 | GP26 | ADC0 | Spare analog |

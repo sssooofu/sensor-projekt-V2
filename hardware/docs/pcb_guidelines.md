@@ -18,7 +18,7 @@ Board: 100 × 80 mm, 2-layer FR4 1.6 mm, ENIG finish, 1 oz copper both layers.
 │  │  [BNC]──[10MΩ]  │  │  │     (castellated, center-right)   │   │  │
 │  │     │           │  │  └────────────────────────────────────┘   │  │
 │  │  [BAV99]        │  │                                           │  │
-│  │     │           │  │  [ADS1115]   [BH1750]                    │  │
+│  │     │           │  │  [ADS1115]   [VEML7700]                  │  │
 │  │  [AD8603]       │  │                                           │  │
 │  │     │           │  │  [LMP91200]                              │  │
 │  │  [VREF divider] │  │                                           │  │
@@ -61,7 +61,7 @@ Board: 100 × 80 mm, 2-layer FR4 1.6 mm, ENIG finish, 1 oz copper both layers.
 
 9. **LMP91200**: place near J8 (EC terminal). SPI traces (GP4–GP7) route as a bundle, away from analog zone. Keep SPI trace lengths within 10 mm of each other.
 
-10. **BH1750**: near ADS1115 (shares I2C bus). Place 100 nF decoupling at VCC pin.
+10. **VEML7700**: near ADS1115 (shares I2C bus). Place 100 nF decoupling at VCC pin. No ADDR pin — I2C address fixed at 0x10.
 
 11. **I2C pullups**: place R10 and R11 (4.7 kΩ) close to Pico W GP2/GP3 pads, not at the sensor end.
 
