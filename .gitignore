@@ -1,5 +1,6 @@
-# KiCad lock files
+# KiCad lock files and local history
 *.lck
+.history/
 
 # SQLite database (created at runtime)
 *.db

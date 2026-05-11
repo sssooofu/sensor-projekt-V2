@@ -1,5 +1,7 @@
 # Server Agent
 
+> **Scope: `server/` only. Do not read, modify, or suggest changes to files outside this directory.**
+
 FastAPI backend running on Raspberry Pi. Receives data from Pico W devices and serves the dashboard.
 
 ## Stack

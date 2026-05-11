@@ -1,5 +1,7 @@
 # Firmware Agent
 
+> **Scope: `firmware/` only. Do not read, modify, or suggest changes to files outside this directory.**
+
 MicroPython firmware for Raspberry Pi Pico W. This subproject owns everything that runs on the device.
 
 ## Tooling (always use these, never raw mpremote commands ad-hoc)

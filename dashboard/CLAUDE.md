@@ -1,5 +1,7 @@
 # Dashboard Agent
 
+> **Scope: `dashboard/` only. Do not read, modify, or suggest changes to files outside this directory.**
+
 Vanilla HTML/JS frontend. No build step, no framework, no bundler. Served as static files by the FastAPI server.
 
 ## Stack

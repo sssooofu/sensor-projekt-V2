@@ -1,5 +1,7 @@
 # Hardware Agent
 
+> **Scope: `hardware/` only. Do not read, modify, or suggest changes to files outside this directory.**
+
 PCB design for the Pico W sensor hub. This subproject owns all electrical design. No firmware or server code here.
 
 ## What's in this folder
