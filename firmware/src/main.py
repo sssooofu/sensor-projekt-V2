@@ -99,7 +99,7 @@ def run_upload_cycle(cfg, reading, buf, ack_id=None):
     readings_to_send = buf.peek_all() + [reading]
     stored = protocol.upload_readings(
         srv["url"], cfg["device_id"], cfg["fw_version"],
-        protocol.vbus_mv(), readings_to_send, srv
+        protocol.vsys_mv(), readings_to_send, srv
     )
     if stored is not None:
         buf.clear()

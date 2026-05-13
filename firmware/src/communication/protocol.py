@@ -37,7 +37,7 @@ def _get(url, timeout_s, retries, retry_delay_s):
     return None, None
 
 
-def upload_readings(server_url, device_id, fw_version, vbus_mv, readings, cfg):
+def upload_readings(server_url, device_id, fw_version, vsys_mv, readings, cfg):
     """
     POST /api/readings. readings is a list of dicts.
     Returns number of stored rows on success, None on failure.
@@ -45,7 +45,7 @@ def upload_readings(server_url, device_id, fw_version, vbus_mv, readings, cfg):
     payload = json.dumps({
         "device_id": device_id,
         "fw": fw_version,
-        "vbus_mv": vbus_mv,
+        "vbus_mv": vsys_mv,
         "readings": readings,
     })
     url = server_url.rstrip("/") + "/api/readings"
@@ -74,10 +74,10 @@ def ack_command(server_url, cmd_id, cfg):
     _post(url, payload, cfg["timeout_s"], cfg["retry_count"], cfg["retry_delay_s"])
 
 
-def vbus_mv():
-    """Read USB VSYS voltage via Pico W ADC3 (voltage divider 3:1)."""
+def vsys_mv():
+    """Read VSYS voltage via Pico W ADC3 (internal 3:1 voltage divider)."""
     try:
-        from machine import ADC, Pin
+        from machine import ADC
         adc = ADC(3)
         v = adc.read_u16() * 3.3 / 65535 * 3
         return round(v * 1000)
