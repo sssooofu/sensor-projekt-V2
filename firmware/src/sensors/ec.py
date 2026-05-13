@@ -7,6 +7,7 @@ Temperature compensation: 2% per °C relative to ref_temp_c.
 """
 
 import math
+import time
 
 
 _NTC_R0   = 10000.0   # NTC nominal resistance at 25 °C
@@ -37,10 +38,15 @@ def read(ads, lmp, cal, pwm_a, pwm_b):
     cal = { "cell_constant": float, "ref_voltage": float, "ref_temp_c": float }
     """
     try:
-        # ADS1115 AIN3 is wired to LMP91200 output (TIA output)
+        pwm_a.duty_u16(32768)
+        pwm_b.duty_u16(32768)
+        time.sleep_ms(10)   # let RC filter (10kΩ + 100nF, τ=1ms) settle
         v_out = ads.read_voltage(3)
     except Exception:
         return None
+    finally:
+        pwm_a.duty_u16(0)
+        pwm_b.duty_u16(0)
 
     ref_v = cal["ref_voltage"]
     cell_k = cal["cell_constant"]

@@ -34,8 +34,8 @@ def init_hardware(cfg):
     cs = Pin(7, Pin.OUT, value=1)
     lmp = LMP91200(spi, cs)
 
-    pwm_a = PWM(Pin(13), freq=2000, duty_u16=32768)
-    pwm_b = PWM(Pin(14), freq=2000, duty_u16=32768)
+    pwm_a = PWM(Pin(13), freq=2000, duty_u16=0)
+    pwm_b = PWM(Pin(14), freq=2000, duty_u16=0)
 
     relay = Relay(pin_num=10, max_on_s=cfg["relay"]["max_on_duration_s"])
 
