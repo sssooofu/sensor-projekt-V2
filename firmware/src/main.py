@@ -78,7 +78,9 @@ def read_all_sensors(cfg, ads, lmp, pwm_a, pwm_b, i2c):
 
 
 def run_upload_cycle(cfg, reading, buf):
-    """Connect WiFi, time-sync, upload buffer + current reading, poll commands."""
+    """Connect WiFi, time-sync, upload buffer + current reading, poll commands.
+    Returns (commands, new_interval_s) — new_interval_s is None if unchanged.
+    """
     srv = cfg["server"]
     wifi_cfg = cfg["wifi"]
 
@@ -86,10 +88,10 @@ def run_upload_cycle(cfg, reading, buf):
                              timeout_s=wifi_cfg["timeout_s"])
     if not connected:
         buf.push(reading)
-        return []
+        return [], None
 
     uptime = power.uptime_ms()
-    time_sync.sync(srv["url"], cfg["device_id"], uptime, timeout_s=srv["timeout_s"])
+    new_interval_s = time_sync.sync(srv["url"], cfg["device_id"], uptime, timeout_s=srv["timeout_s"])
 
     readings_to_send = buf.peek_all() + [reading]
     stored = protocol.upload_readings(
@@ -103,7 +105,7 @@ def run_upload_cycle(cfg, reading, buf):
 
     commands = protocol.poll_commands(srv["url"], cfg["device_id"], srv)
     wifi.disconnect()
-    return commands
+    return commands, new_interval_s
 
 
 def handle_relay(commands, relay, reading, cfg):
@@ -138,7 +140,9 @@ def main():
         reading = read_all_sensors(cfg, ads, lmp, pwm_a, pwm_b, i2c)
         print("Reading:", reading)
 
-        commands = run_upload_cycle(cfg, reading, buf)
+        commands, new_interval_s = run_upload_cycle(cfg, reading, buf)
+        if new_interval_s is not None:
+            interval_s = new_interval_s
         handle_relay(commands, relay, reading, cfg)
 
         led.value(0)
