@@ -20,19 +20,16 @@ async def post_readings(upload: ReadingsUpload):
 
     stored = 0
     for r in upload.readings:
-        try:
-            cur = await db.execute(
-                """INSERT OR IGNORE INTO readings
-                   (device_id, ts, ph, ec_us, temp_c, humidity_pct, lux, soil_pct, motion, vbus_mv)
-                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
-                (upload.device_id, r.ts, r.ph, r.ec_us, r.temp_c,
-                 r.humidity_pct, r.lux, r.soil_pct,
-                 int(r.motion) if r.motion is not None else None,
-                 upload.vbus_mv)
-            )
-            stored += cur.rowcount
-        except Exception:
-            pass
+        cur = await db.execute(
+            """INSERT OR IGNORE INTO readings
+               (device_id, ts, ph, ec_us, temp_c, humidity_pct, lux, soil_pct, motion, vbus_mv)
+               VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)""",
+            (upload.device_id, r.ts, r.ph, r.ec_us, r.temp_c,
+             r.humidity_pct, r.lux, r.soil_pct,
+             int(r.motion) if r.motion is not None else None,
+             upload.vbus_mv)
+        )
+        stored += cur.rowcount
 
     await db.commit()
     return ReadingsUploadResponse(ok=True, stored=stored)
