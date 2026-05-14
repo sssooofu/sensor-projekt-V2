@@ -93,6 +93,8 @@ def run_upload_cycle(cfg, reading, buf, ack_id=None):
     srv = cfg["server"]
     wifi_cfg = cfg["wifi"]
 
+    vbus_mv = protocol.vsys_mv()  # measure before WiFi uses GPIO29
+
     connected = wifi.connect(wifi_cfg["ssid"], wifi_cfg["password"],
                              timeout_s=wifi_cfg["timeout_s"])
     if not connected:
@@ -108,7 +110,7 @@ def run_upload_cycle(cfg, reading, buf, ack_id=None):
     readings_to_send = buf.peek_all() + [reading]
     stored = protocol.upload_readings(
         srv["url"], cfg["device_id"], cfg["fw_version"],
-        protocol.vsys_mv(), readings_to_send, srv
+        vbus_mv, readings_to_send, srv
     )
     if stored is not None:
         buf.clear()
