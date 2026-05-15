@@ -15,7 +15,7 @@
     "retry_delay_s": 5
   },
 
-  "poll_interval_s": 1800,
+  "poll_interval_s": 60,
 
   "sensors": {
     "ph":          { "enabled": false, "ads_channel": 0 },
